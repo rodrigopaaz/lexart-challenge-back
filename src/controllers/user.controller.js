@@ -1,4 +1,4 @@
-const { createUserService } = require('../services/user.service');
+const { createUserService, findUser } = require('../services/user.service');
 
 const createUserController = async (req, res) => {
   try {
@@ -14,6 +14,17 @@ const createUserController = async (req, res) => {
   }
 };
 
+const findUserController = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await findUser(id);
+    res.status(201).json(result);
+  } catch (error) {
+    res.status(409).json(error.message);
+  }
+};
+
 module.exports = {
   createUserController,
+  findUserController,
 };

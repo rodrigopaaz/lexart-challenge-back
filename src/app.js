@@ -10,9 +10,11 @@ app.use((req, res, next) => {
 });
 
 const {
-  userRouter,
+  userRouter, loginRouter, messageRouter,
 } = require('./routes');
 
 app.use('/user', userRouter);
+app.use('/login', loginRouter);
+app.use('/message', messageRouter);
 
 module.exports = app;
