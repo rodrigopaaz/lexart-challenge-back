@@ -12,7 +12,7 @@ This project is a chat application developed for the Lexart Challenge.
 - User registration and login
 
 ## Technologies Used
-- Node.js: React.js, HTML, CSS
+- Node.js
 - Express.js
 - JWT
 - Bcrypt
