@@ -20,7 +20,18 @@ const validatePassword = async (req, res, next) => {
   return next();
 };
 
+const validateName = async (req, res, next) => {
+  const { name } = req.body;
+
+  if (name?.length < 2) {
+    return res.status(400).json({ message: '"name" length must be at least 2 characters long' });
+  }
+
+  return next();
+};
+
 module.exports = {
   validatePassword,
   validateEmail,
+  validateName,
 };

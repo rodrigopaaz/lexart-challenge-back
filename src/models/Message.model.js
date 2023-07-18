@@ -11,9 +11,8 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       file: DataTypes.BLOB('long'),
-      createdAt: {
-        type: DataTypes.DATE(6),
-        defaultValue: DataTypes.NOW(6),
+      fileName: {
+        type: DataTypes.STRING,
       },
     },
     {

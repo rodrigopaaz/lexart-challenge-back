@@ -1,8 +1,9 @@
 const { Messages } = require('../models');
 
-const createMessage = async (userId, file) => {
+const createMessage = async (userId, fileName, file) => {
   try {
-    const message = await Messages.create({ userId, file });
+    console.log(userId, file, fileName)
+    const message = await Messages.create({ userId, file, fileName });
     return message;
   } catch (error) {
     throw new Error('Failed to create message');

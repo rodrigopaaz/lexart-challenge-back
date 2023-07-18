@@ -3,7 +3,6 @@ const { createToken } = require('../utils/JWT.token');
 const { encryptPassword } = require('./validations/encriptUtils');
 
 const createUserService = async (info) => {
-  console.log(info)
   try {
     const {
       name, email, password,
@@ -22,7 +21,7 @@ const createUserService = async (info) => {
       password: hashedPassword,
     });
     const token = createToken( {data} );
-    return { token };
+    return { token, name: data.name, id: data.id };
   } catch (error) {
     throw new Error(error);
   }
@@ -31,15 +30,14 @@ const findUser = async (userId)=>{
   try {
     const user = await Users.findByPk(userId, {
       attributes: { exclude: ['password'] },
-      include: 'messages', attributes: ['id'],
+      include: 'messages'
     })
-    return user
+    const messageIds = user.messages.map((message) => ({id: message.id, fileName: message.fileName}))
+    return {userId: user.id, messageIds: messageIds}
   } catch (error) {
     return error
   }
-  
 }
-
 
 module.exports = {
   createUserService,
