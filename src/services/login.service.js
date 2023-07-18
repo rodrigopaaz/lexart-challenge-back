@@ -1,20 +1,22 @@
-const md5 = require('md5');
 const { Users } = require('../models');
 const { createToken } = require('../utils/JWT.token');
+const { encryptPassword, comparePasswords } = require('./validations/encriptUtils');
 
-const loginService = async (email, passwordUncripted) => {
-  const password = md5(passwordUncripted);
-  const data = await Users.findOne({
-    where: { email, password },
-    attributes: { exclude: ['password'] },
-  });
-  if (!data) {
-    throw new Error('Invalid login');
+const loginService = async (email, password) => {
+  try {
+    const keyword = process.env.KEYWORD;
+    const hashedPassword = await encryptPassword(password, keyword);
+    const data = await Users.findOne({
+      where: { email }
+    });
+    if(!data) throw new Error("email not found");
+    await comparePasswords(password, hashedPassword, keyword );
+    const token = createToken({ data });
+    return { token, name: data.name, id: data.id };
+  } catch (error) {
+    return {message: error}
   }
-  const token = createToken({ data });
-  return { token, ...data.dataValues };
+ 
 };
 
-module.exports = {
-  loginService,
-};
+module.exports = loginService;
