@@ -31,7 +31,7 @@ const findUser = async (userId)=>{
   try {
     const user = await Users.findByPk(userId, {
       attributes: { exclude: ['password'] },
-      include: 'messages',
+      include: 'messages', attributes: ['id'],
     })
     return user
   } catch (error) {
