@@ -8,8 +8,7 @@ const {
 } = mocha;
 const { messageMock } = require('../mocks/messageMock');
 const { Messages } = require('../../src/models');
-const app = require('../../src/app'); // Importe o arquivo do seu aplicativo (app.js)
-const { createMessage } = require('../../src/services/message.service');
+const app = require('../../src/app');
 
 chai.use(chaiHttp);
 
@@ -32,7 +31,8 @@ describe('Testing Endpoint message', () => {
       .request(app)
       .post('/message')
       .attach('file', fileContent, fileName)
-      .field('userId', userId);
+      .field('userId', userId)
+      .buffer(false);
 
     expect(response).to.have.status(200);
     expect(response.body).to.deep.equal(messageMock);
