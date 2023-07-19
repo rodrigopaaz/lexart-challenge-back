@@ -33,7 +33,7 @@ This project is a chat application developed for the Lexart Challenge.
   
 The application has tests of the main functionalities.
 
-![Tests](<img src="https://i.imgur.com/Gl0yOp1.png" title="source: imgur.com" />)
+![Tests]("https://i.imgur.com/Gl0yOp1.png")
 
 ## Environment variables
 
