@@ -4,9 +4,9 @@ const userMock = {
   id: 2,
 };
 
-const findByPk = {
+const findUserByPk = {
   userId: 1,
   messageIds: [],
 };
 
-module.exports = { userMock, findByPk };
+module.exports = { userMock, findUserByPk };

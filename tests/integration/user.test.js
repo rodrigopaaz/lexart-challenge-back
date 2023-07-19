@@ -9,14 +9,14 @@ const {
 
 const app = require('../../src/app');
 
-const { userMock, findByPk } = require('../mocks/userMock');
+const { userMock, findUserByPk } = require('../mocks/userMock');
 const { Users } = require('../../src/models');
 
 chai.use(chaiHttp);
 
-describe('Testing Endpoint User', () => {
+describe('Testing Endpoints user/login', () => {
   beforeEach(() => {
-    sinon.stub(Users, 'findByPk').resolves(findByPk);
+    sinon.stub(Users, 'findByPk').resolves(findUserByPk);
     sinon.stub(Users, 'create').resolves(userMock);
   });
 
@@ -27,13 +27,22 @@ describe('Testing Endpoint User', () => {
     sinon.restore();
   });
 
-  it('Return must be an error', async () => {
+  it('Testing password validation', async () => {
+    chaiHttpResponse = await chai.request(app).post('/user').send({
+      name: 'user',
+      email: 'user@email.com',
+      password: 'abc13',
+    });
+    expect(chaiHttpResponse.error.text).to.be.eq('{"message":"\\"password\\" length must be at least 6 characters long"}');
+  });
+
+  it('Testing email validation', async () => {
     chaiHttpResponse = await chai.request(app).post('/user').send({
       name: 'user',
       email: 'useremail.com',
-      password: 'abc13',
+      password: 'abc123',
     });
-    expect(chaiHttpResponse.status).to.be.eq(400);
+    expect(chaiHttpResponse.error.text).to.be.eq('{"message":"\\"email\\" must be a valid email"}');
   });
 
   it('Test create user route', async () => {
@@ -52,5 +61,14 @@ describe('Testing Endpoint User', () => {
     });
 
     expect(chaiHttpResponse.status).to.be.eq(200);
+  });
+
+  it('Test Login Route using a invalid  user', async () => {
+    chaiHttpResponse = await chai.request(app).post('/login').send({
+      email: 'xablau@email.com',
+      password: 'abc123',
+    });
+
+    expect(chaiHttpResponse.status).to.be.eq(404);
   });
 });
