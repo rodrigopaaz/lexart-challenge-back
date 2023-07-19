@@ -1,6 +1,6 @@
 # Lexart Chatbot Project
 
-![Chatbot Robot](https://static.vecteezy.com/system/resources/previews/022/254/572/large_2x/robot-working-on-laptop-computer-artificial-intelligence-concept-3d-rendering-generative-ai-free-photo.jpg)
+![Chatbot Robot](https://res.cloudinary.com/practicaldev/image/fetch/s--Do26DEeT--/c_imagga_scale,f_auto,fl_progressive,h_900,q_auto,w_1600/https://dev-to-uploads.s3.amazonaws.com/i/uskd4x557wno7irs1q71.png)
 This project implements a chatbot with interactive features and user registration functionality. The chatbot is designed to respond to specific messages and provide personalized assistance to users.
 # Lexart Challenge
 
