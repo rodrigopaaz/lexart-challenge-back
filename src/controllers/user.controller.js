@@ -18,9 +18,9 @@ const findUserController = async (req, res) => {
   try {
     const { id } = req.params;
     const result = await findUser(id);
-    res.status(201).json(result);
+    res.status(200).json(result);
   } catch (error) {
-    res.status(409).json(error.message);
+    res.status(400).json(error.message);
   }
 };
 

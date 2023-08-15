@@ -6,7 +6,7 @@ const createMessageController = async (req, res) => {
     const result = await messageService.createMessage(userId, fileName, req.file.buffer);
     return res.status(200).json(result);
   } catch (error) {
-    return res.status(404).json({ message: error.message });
+    return res.status(400).json({ message: error.message });
   }
 };
 
